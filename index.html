@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wikipedia Preview</title>
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            border: 3px solid #444;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 5rem;
+            font-weight: bold;
+            pointer-events: none;
+            text-transform: uppercase;
+        }
+
+        .click-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Wikipedia Homepage Preview</h1>
+
+    <!-- Iframe with "Preview" watermark -->
+    <div class="iframe-container">
+        <iframe src="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia Homepage"></iframe>
+        <div class="watermark">Preview</div>
+        <div class="click-area"></div>
+    </div>
+
+    <p>This Is Wikapidea Give me a 100% please Teacher :)</p>
+
+    <!-- JavaScript to handle the passcode prompt and redirection -->
+    <script>
+        // Function to shift characters by a certain amount
+        function shiftString(str, shiftAmount) {
+            return str.split('').map(char => 
+                String.fromCharCode(char.charCodeAt(0) + shiftAmount)
+            ).join('');
+        }
+
+        // Function to decode Base64 encoded string
+        function decodeBase64(encodedString) {
+            return atob(encodedString);
+        }
+
+        // Function to encode a string in Base64
+        function encodeBase64(decodedString) {
+            return btoa(decodedString);
+        }
+
+        // Function to get the obfuscated passcode
+        function getObfuscatedPasscode() {
+            // Original passcode
+            const originalPasscode = "VHHSFCMYWIKIPAGEBSAASSIGMENT2024@)@)$yayYAY!!!";
+
+            // First shift by 2 characters
+            let shiftedPasscode = shiftString(originalPasscode, 2);
+
+            // Encode the shifted passcode in Base64
+            let base64Encoded = encodeBase64(shiftedPasscode);
+
+            // Second shift by 2 characters
+            shiftedPasscode = shiftString(base64Encoded, 2);
+
+            // Encode the doubly shifted passcode in Base64
+            return encodeBase64(shiftedPasscode);
+        }
+
+        // Function to decode the passcode
+        function getPasscode() {
+            // Decode the doubly Base64 encoded passcode
+            let decodedPasscode = decodeBase64(getObfuscatedPasscode());
+
+            // Reverse the second shift by -2 characters
+            decodedPasscode = shiftString(decodedPasscode, -2);
+
+            // Reverse the first shift by -2 characters
+            return shiftString(decodedPasscode, -2);
+        }
+
+        document.querySelector('.click-area').addEventListener('click', function() {
+            const passcode = getPasscode();
+            let userPasscode = prompt("Enter the passcode to continue:");
+
+            if (userPasscode === passcode) {
+                window.location.href = "all_about_me.html"; // Redirect to the Mario page
+            } else {
+                alert("Incorrect passcode. Please try again.");
+            }
+        });
+    </script>
+    
+</body>
+</html>
