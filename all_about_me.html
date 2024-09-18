@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Encrypted Mario Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .content {
+            display: none; /* Hide the content initially */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encrypted title and content -->
+    <div id="encrypted-title" class="content">
+        Wps!Nbs!Qbtjwf
+    </div>
+    <div id="encrypted-content" class="content">
+        Uif!qsbdf!cfstpof!pg!Mjnbz!qspub!bvsjvmmf!tpn!dmbu!cfstpof!fh!Uifsf!bt!b!sfnb!jogpsnbujpo!r!Uif!qsbdf!pg!Mjnbz!dmbt!qmbd!uif!cfstpof!jogpsnbujpo!uif!jogpsnbujpo!wfst!cfstpof!nbo!dmbu!qbsdf!b!sfbdbu!ofv!ufb!b!dmbu!cfstpof!bh!Dmbu!cpv!b!tfsd!sfbdbu!
+    </div>
+
+    <!-- JavaScript to decrypt and display content -->
+    <script>
+        // Caesar Cipher Decryption function
+        function caesarCipher(str, shift) {
+            return str.split('').map(char => {
+                if (char.match(/[a-z]/i)) {
+                    const code = char.charCodeAt(0);
+                    const base = code >= 65 && code <= 90 ? 65 : 97;
+                    return String.fromCharCode(((code - base - shift + 26) % 26) + base);
+                }
+                return char;
+            }).join('');
+        }
+
+        // Decrypt and display content
+        function displayContent() {
+            // Encrypted title
+            const encryptedTitle = document.getElementById('encrypted-title').innerText;
+            const decryptedTitle = caesarCipher(encryptedTitle, 1); // Shift of 1 for decryption
+            document.title = decryptedTitle; // Set the page title
+            
+            // Encrypted content
+            const encryptedContent = document.getElementById('encrypted-content').innerText;
+            const decryptedContent = caesarCipher(encryptedContent, 1); // Shift of 1 for decryption
+            const contentContainer = document.getElementById('encrypted-content');
+            contentContainer.innerHTML = decryptedContent;
+            contentContainer.style.display = 'block'; // Show the content
+        }
+
+        // Call displayContent function on page load
+        window.onload = displayContent;
+    </script>
+    
+</body>
+</html>
